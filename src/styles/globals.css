@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:wght@400;500&display=swap");
+@import "@styles/colors-default.css";
+@import "@styles/sizes.css";
+
+/* RESETS */
+* {
+	box-sizing: border-box;
+	font-family: "Sometype Mono", monospace;
+}
+/* COLORS ASSIGNMENT */
+html,
+body {
+	background-color: var(--main-background);
+}
+.content,
+.tabs-content {
+	background-color: var(--main-background-dark);
+	color: var(--gray-medium);
+}
+.var {
+	color: var(--gray-light);
+}
+
+::selection {
+	background: var(--gray-dark);
+	color: var(--gray-medium);
+}
+
+/* DECORATION */
+
+body {
+	padding: 0px;
+	margin: 0px;
+	line-height: 2em;
+	font-size: 1.05em;
+}
+
+.DraftEditor-root,
+.DraftEditor-editorContainer,
+.public-DraftEditor-content {
+	height: 100%;
+}
+
+/* STRUCTURE */
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Text Editor */
+.text-editor {
+	padding: 100px;
+	width: 100%;
+	height: calc(var(--vw-height) - var(--file-bar-height));
+	box-sizing: border-box;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: auto;
+	scrollbar-color: #575757 #1a1c20;
+}
+
+.content::-webkit-scrollbar,
+.tabs-content::-webkit-scrollbar {
+	width: 8px;
+}
+
+.content::-webkit-scrollbar-track,
+.tabs-content::-webkit-scrollbar-track {
+	background: #1a1c20;
+}
+
+.content::-webkit-scrollbar-thumb,
+.tabs-content::-webkit-scrollbar-thumb {
+	background-color: #575757;
+	border-radius: 3px;
+	border: 3px solid #575757;
+}

@@ -1,0 +1,22 @@
+{
+	"59": {
+		"typed": "plant",
+		"displayed": "tree"
+	},
+	"60": {
+		"typed": "toy",
+		"displayed": "beach ball"
+	},
+	"61": {
+		"typed": "weapon",
+		"displayed": "water gun"
+	},
+	"62": {
+		"typed": "path",
+		"displayed": "Mountain Road"
+	},
+	"64": {
+		"typed": "protag",
+		"displayed": "Jerry"
+	}
+}

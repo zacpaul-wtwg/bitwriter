@@ -1,0 +1,12 @@
+/* COLOR VARIABLES */
+:root {
+	--main-background-dark: rgb(26, 28, 32);
+	--main-background: rgb(48, 49, 54);
+	--main-accent: rgb(56, 71, 114);
+	--gray-medium: rgb(92, 92, 92);
+	--gray-dark: rgb(51, 51, 51);
+	--gray-light: rgb(182, 182, 182);
+
+	--error: rgb(146, 0, 0);
+	--success: rgb(0, 117, 0);
+}

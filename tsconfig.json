@@ -19,7 +19,15 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@mocks/*": ["./src/mocks/*"], 
+      "@styles/*": ["./src/styles/*"],
+      "@fetchers/*": ["./src/lib/fetchers/*"],
+      "@dexie/*": ["./src/lib/dexie/*"],
+
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
