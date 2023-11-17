@@ -3,22 +3,43 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFile, faPenNib } from "@fortawesome/free-solid-svg-icons"
-import { dbInitAction } from "@dexie/dbInitAction"
+import { faPenNib } from "@fortawesome/free-solid-svg-icons"
+import { dbInit } from "@dexie/dbInit" // Import dbInit
+import { dbInitAction } from "@dexie/dbInitAction" // Assuming this is the correct import for dbInitAction
+import { useProject } from "@contexts/ProjectContext" // Import useProject
 
 const FileBar: React.FC = () => {
 	const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+	const [projectItems, setProjectItems] = useState<
+		{ name: string; action: () => void }[]
+	>([])
 	const dropdownRefs = useRef(new Map<string, HTMLDivElement>())
+	const { currentProject, setCurrentProject } = useProject() // Use the useProject hook
+	useEffect(() => {
+		const fetchProjects = async () => {
+			const projects = await dbInit.projects.toArray()
+			const projectDropdownItems = projects.map((project) => ({
+				name: project.project_name,
+				action: () => {
+					console.log(`Project ${project.project_name} selected`)
+					setCurrentProject({
+						id: project.project_id.toString(),
+						name: project.project_name,
+					}) // Update the current project in context
+				},
+			}))
+			setProjectItems(projectDropdownItems)
+			console.log("Current Project:", currentProject)
+		}
+
+		fetchProjects()
+	}, [currentProject, setCurrentProject])
+
 	const fileBarActions = [
 		{
-			id: "project",
-			label: "Project",
-			icon: faFile,
+			id: "file",
+			label: "File",
 			dropdown: [
-				{
-					name: "Open Project",
-					action: () => console.log("Opening project..."),
-				},
 				{
 					name: "Create New Project",
 					action: () => console.log("Creating new project..."),
@@ -27,9 +48,22 @@ const FileBar: React.FC = () => {
 					name: "Create Example Project",
 					action: () => dbInitAction(),
 				},
+				{
+					name: "Export Project",
+					action: () => console.log("Exporting project..."),
+				},
+				{
+					name: "Log Out",
+					action: () => console.log("Logging Out..."),
+				},
 			],
 		},
-		// Add more sections with dropdowns as needed
+		{
+			id: "projects",
+			label: "Projects",
+			dropdown: projectItems,
+		},
+		// ... other sections
 	]
 
 	const toggleDropdown = (actionId: string) => {

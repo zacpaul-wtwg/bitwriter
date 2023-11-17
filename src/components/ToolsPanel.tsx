@@ -111,7 +111,7 @@ const ToolsPanel: React.FC = () => {
 			<div className='tabs'>
 				<div>
 					{tabs.map((tab) => (
-						<>
+						<React.Fragment key={tab.id}>
 							<button
 								title={tab.title}
 								key={tab.id}
@@ -125,7 +125,7 @@ const ToolsPanel: React.FC = () => {
 									<hr />
 								</div>
 							)}
-						</>
+						</React.Fragment>
 					))}
 				</div>
 				<div className='settings'>
