@@ -5,6 +5,7 @@ import "@styles/globals.css"
 import FileBar from "@/components/fileBar/FileBar"
 import { EditorProvider } from "@contexts/EditorContext" // Adjust the import path as needed
 import { ProjectProvider } from "@contexts/ProjectContext"
+import ToolsPanel from "@/components/ToolsPanel"
 
 export default function RootLayout({ children }) {
 	return (
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
 					<body>
 						<FileBar />
 						<div className='flex-row'>
+							<ToolsPanel />
 							<main className='container'>
 								<div className='content'>{children}</div>
 							</main>
