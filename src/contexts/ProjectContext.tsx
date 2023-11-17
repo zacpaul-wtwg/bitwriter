@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, ReactNode, FC } from "react"
 
 interface Project {
-	id: string
+	id: number
 	name: string
 }
 

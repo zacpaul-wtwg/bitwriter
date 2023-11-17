@@ -1,35 +1,29 @@
 [
 	{
-		"id": 1,
 		"title": "The Awakening",
 		"chapter_order": 1,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "A Mysterious Morning",
 				"scene_order": 1,
 				"content": "The sun pierced through the curtains, casting a glow on an ancient map sprawled across the table, its edges worn and its lines telling of uncharted lands."
 			},
 			{
-				"id": 2,
 				"title": "The Call to Adventure",
 				"scene_order": 2,
 				"content": "A cryptic letter slid under the door, sealed with a wax emblem of a phoenix, beckoning the protagonist to a journey beyond the mundane."
 			},
 			{
-				"id": 3,
 				"title": "An Unlikely Meeting",
 				"scene_order": 3,
 				"content": "In the bustling market square, amidst the cacophony of haggling voices, a cloaked figure offered a key, whispering of a locked tower and its forbidden secrets."
 			},
 			{
-				"id": 4,
 				"title": "Whispers in the Dark",
 				"scene_order": 4,
 				"content": "Under the cloak of night, the protagonist overheard a conspiracy, shadows plotting the downfall of an ancient order."
 			},
 			{
-				"id": 5,
 				"title": "A Narrow Escape",
 				"scene_order": 5,
 				"content": "A chase through the cobbled streets ensued as the protagonist fled from unseen enemies, the key burning a promise of survival in their pocket."
@@ -37,36 +31,30 @@
 		]
 	},
 	{
-		"id": 2,
 		"title": "The Labyrinth of Shadows",
 		"chapter_order": 2,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "Into the Depths",
 				"scene_order": 1,
 				"content": "The tower loomed, its door unlocked by the mysterious key, revealing a spiral staircase descending into darkness."
 			},
 			{
-				"id": 2,
 				"title": "Echoes of the Past",
 				"scene_order": 2,
 				"content": "Whispers clung to the walls of the labyrinth, each step uncovering echoes of ancient chants and long-forgotten spells."
 			},
 			{
-				"id": 3,
 				"title": "The Guardian's Riddle",
 				"scene_order": 3,
 				"content": "A stone guardian awoke, its eyes glowing with a spectral light, posing a riddle as old as time itself."
 			},
 			{
-				"id": 4,
 				"title": "The Mirror of Truth",
 				"scene_order": 4,
 				"content": "A mirror in the heart of the labyrinth reflected not the protagonist's face, but their deepest fears and untold desires."
 			},
 			{
-				"id": 5,
 				"title": "The Hidden Chamber",
 				"scene_order": 5,
 				"content": "Behind a wall of illusions, a chamber revealed the history of the phoenix, its ashes still warm, hinting at rebirth."
@@ -74,36 +62,30 @@
 		]
 	},
 	{
-		"id": 3,
 		"title": "The Gathering Storm",
 		"chapter_order": 3,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "Allies in the Night",
 				"scene_order": 1,
 				"content": "A band of unlikely allies gathered, each bearing a unique skill, united by the protagonist's cause."
 			},
 			{
-				"id": 2,
 				"title": "The Map Reconstructed",
 				"scene_order": 2,
 				"content": "The ancient map's secrets were unlocked, its routes and hidden passages forming a path to a legendary power."
 			},
 			{
-				"id": 3,
 				"title": "The First Obstacle",
 				"scene_order": 3,
 				"content": "The group faced their first test, a bridge guarded by a spectral beast, its eyes reflecting the storm above."
 			},
 			{
-				"id": 4,
 				"title": "A Bond Forged",
 				"scene_order": 4,
 				"content": "As thunder roared, trust was forged among the allies, their shared perils binding them closer than blood."
 			},
 			{
-				"id": 5,
 				"title": "The Eye of the Storm",
 				"scene_order": 5,
 				"content": "In the storm's calm eye, a moment of respite revealed the depth of the conspiracy, a plot that threatened the very fabric of the world."
@@ -111,36 +93,30 @@
 		]
 	},
 	{
-		"id": 4,
 		"title": "The Enigma of Elements",
 		"chapter_order": 4,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Whispering Woods",
 				"scene_order": 1,
 				"content": "The trees themselves seemed to speak as the group ventured into the forest, where the air shimmered with enchantment."
 			},
 			{
-				"id": 2,
 				"title": "The Elemental Trial",
 				"scene_order": 2,
 				"content": "At the heart of the woods, the group faced a trial by the elements, each member confronting their own nature."
 			},
 			{
-				"id": 3,
 				"title": "The Water's Wisdom",
 				"scene_order": 3,
 				"content": "A serene lake offered cryptic visions in its depths, revealing fragments of the past and possible futures."
 			},
 			{
-				"id": 4,
 				"title": "The Fire's Test",
 				"scene_order": 4,
 				"content": "A ring of fire ignited around them, testing their resolve as they sought to claim an artifact of ancient power."
 			},
 			{
-				"id": 5,
 				"title": "The Earth's Embrace",
 				"scene_order": 5,
 				"content": "In the aftermath, the earth itself healed their wounds, whispering of the strength found in unity."
@@ -148,36 +124,30 @@
 		]
 	},
 	{
-		"id": 5,
 		"title": "The City of Secrets",
 		"chapter_order": 5,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Hidden Path",
 				"scene_order": 1,
 				"content": "A secret passage unveiled the way to a city lost in time, its spires hidden by spells of concealment."
 			},
 			{
-				"id": 2,
 				"title": "The Keepers of Knowledge",
 				"scene_order": 2,
 				"content": "The city's ancient librarians guarded the wisdom of ages, offering riddles in exchange for their secrets."
 			},
 			{
-				"id": 3,
 				"title": "The Archive of Truth",
 				"scene_order": 3,
 				"content": "In the city's heart lay an archive, its scrolls holding the keys to untangling the web of lies spun by their enemies."
 			},
 			{
-				"id": 4,
 				"title": "The Shadow's Trail",
 				"scene_order": 4,
 				"content": "A trail of shadows led them through the city, each step bringing them closer to the enemy's spy."
 			},
 			{
-				"id": 5,
 				"title": "The Unseen Alliance",
 				"scene_order": 5,
 				"content": "An alliance was struck with the city's unseen, their cloaked figures a blur as they pledged to aid the cause."
@@ -185,36 +155,30 @@
 		]
 	},
 	{
-		"id": 6,
 		"title": "The Siege of Night",
 		"chapter_order": 6,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Gathering Darkness",
 				"scene_order": 1,
 				"content": "As night fell, a darkness gathered at the city's edge, an army of nightmares amassing."
 			},
 			{
-				"id": 2,
 				"title": "The Wall of Whispers",
 				"scene_order": 2,
 				"content": "The city's ancient walls hummed with protective spells, whispers of the ancestors fortifying the stone."
 			},
 			{
-				"id": 3,
 				"title": "The Clash of Wills",
 				"scene_order": 3,
 				"content": "The siege began, a cacophony of wills clashing in the night, the air thick with magic and malintent."
 			},
 			{
-				"id": 4,
 				"title": "The Cry of the Phoenix",
 				"scene_order": 4,
 				"content": "Above the chaos, the phoenix's cry rang out, a beacon of hope piercing the darkness."
 			},
 			{
-				"id": 5,
 				"title": "The Break of Dawn",
 				"scene_order": 5,
 				"content": "With the first light of dawn, the darkness waned, the siege broken by the steadfast bravery of the defenders."
@@ -222,36 +186,30 @@
 		]
 	},
 	{
-		"id": 7,
 		"title": "The Voyage Uncharted",
 		"chapter_order": 7,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Sea of Whispers",
 				"scene_order": 1,
 				"content": "The group set sail on a sea that murmured with the voices of those lost to its depths, guiding them onward."
 			},
 			{
-				"id": 2,
 				"title": "The Storm's Rage",
 				"scene_order": 2,
 				"content": "A tempest bore down upon them, a test of their resolve as they navigated through the heart of the storm."
 			},
 			{
-				"id": 3,
 				"title": "The Island of Echoes",
 				"scene_order": 3,
 				"content": "An island appeared amidst the tempest, its shores echoing with the songs of sirens and the promise of secrets."
 			},
 			{
-				"id": 4,
 				"title": "The Cavern of Reflections",
 				"scene_order": 4,
 				"content": "Beneath the island, a cavern of crystal reflected not just their forms, but the essence of their souls."
 			},
 			{
-				"id": 5,
 				"title": "The Wind's Favor",
 				"scene_order": 5,
 				"content": "With newfound knowledge and the wind's favor, they set sail once more, the island fading into legend behind them."
@@ -259,36 +217,30 @@
 		]
 	},
 	{
-		"id": 8,
 		"title": "The Summit of Fates",
 		"chapter_order": 8,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Mountain's Challenge",
 				"scene_order": 1,
 				"content": "A mountain loomed before them, its peak shrouded in mystery, a challenge to their quest's end."
 			},
 			{
-				"id": 2,
 				"title": "The Path of Trials",
 				"scene_order": 2,
 				"content": "The path wound upwards, each turn presenting a trial that tested their limits and the bonds they shared."
 			},
 			{
-				"id": 3,
 				"title": "The Gate of Ages",
 				"scene_order": 3,
 				"content": "At the summit stood a gate, carved with the ages of the world, demanding a sacrifice to pass."
 			},
 			{
-				"id": 4,
 				"title": "The Keeper of the Summit",
 				"scene_order": 4,
 				"content": "The gate's keeper emerged, a being of pure energy, questioning their worthiness to enter the realm beyond."
 			},
 			{
-				"id": 5,
 				"title": "The Realm Beyond",
 				"scene_order": 5,
 				"content": "Beyond the gate lay a realm of infinite possibilities, the threads of fate weaving around them in a dance of time."
@@ -296,36 +248,30 @@
 		]
 	},
 	{
-		"id": 9,
 		"title": "The Eclipse of Hope",
 		"chapter_order": 9,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Darkening Sky",
 				"scene_order": 1,
 				"content": "An eclipse cast the world in shadow, a darkness that crept into the hearts of the bravest."
 			},
 			{
-				"id": 2,
 				"title": "The Light Fading",
 				"scene_order": 2,
 				"content": "The light of the phoenix dimmed, its power waning as the shadow threatened to extinguish it forever."
 			},
 			{
-				"id": 3,
 				"title": "The Last Stand",
 				"scene_order": 3,
 				"content": "The group made their last stand, a circle of light against the encroaching dark, their spirits unyielding."
 			},
 			{
-				"id": 4,
 				"title": "The Return of the Phoenix",
 				"scene_order": 4,
 				"content": "When hope seemed lost, the phoenix rose from within them, its fire reigniting in a blaze of glory."
 			},
 			{
-				"id": 5,
 				"title": "The Shadow's Retreat",
 				"scene_order": 5,
 				"content": "The darkness recoiled, the shadow retreating from the phoenix's light, the eclipse ending as suddenly as it began."
@@ -333,36 +279,30 @@
 		]
 	},
 	{
-		"id": 10,
 		"title": "The Phoenix's Rise",
 		"chapter_order": 10,
 		"scenes": [
 			{
-				"id": 1,
 				"title": "The Final Battle",
 				"scene_order": 1,
 				"content": "The allies stood before the gates of the adversary, the air crackling with magic and malice, as the final battle dawned."
 			},
 			{
-				"id": 2,
 				"title": "The Power Unleashed",
 				"scene_order": 2,
 				"content": "The protagonist channeled the power of the phoenix, flames dancing at their fingertips, as they faced their nemesis."
 			},
 			{
-				"id": 3,
 				"title": "The Turn of the Tide",
 				"scene_order": 3,
 				"content": "The battle raged, and when all seemed lost, the power of the allies' unity turned the tide against the shadows."
 			},
 			{
-				"id": 4,
 				"title": "The Fall of Darkness",
 				"scene_order": 4,
 				"content": "With a final, resounding cry, the darkness was vanquished, light flooding the battlefield as the adversary fell."
 			},
 			{
-				"id": 5,
 				"title": "A New Dawn",
 				"scene_order": 5,
 				"content": "The phoenix soared above, its cry a song of renewal as the world awoke to a new dawn, forever changed by the protagonist's journey."

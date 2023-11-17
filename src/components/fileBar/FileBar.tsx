@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenNib } from "@fortawesome/free-solid-svg-icons"
-import { dbInit } from "@dexie/dbInit" // Import dbInit
+import { db } from "@dexie/db"
 import { dbInitAction } from "@dexie/dbInitAction" // Assuming this is the correct import for dbInitAction
 import { useProject } from "@contexts/ProjectContext" // Import useProject
 
@@ -17,17 +17,23 @@ const FileBar: React.FC = () => {
 	const { currentProject, setCurrentProject } = useProject() // Use the useProject hook
 	useEffect(() => {
 		const fetchProjects = async () => {
-			const projects = await dbInit.projects.toArray()
+			const projects = await db.projects.toArray()
 			const projectDropdownItems = projects.map((project) => ({
 				name: project.project_name,
 				action: () => {
 					console.log(`Project ${project.project_name} selected`)
-					setCurrentProject({
-						id: project.project_id.toString(),
-						name: project.project_name,
-					}) // Update the current project in context
+					if (typeof project.project_id === "number") {
+						setCurrentProject({
+							id: project.project_id, // project_id is confirmed to be a number here
+							name: project.project_name,
+						})
+					} else {
+						console.error("Project ID is undefined")
+						// Handle the undefined case appropriately, maybe set an error state or message
+					}
 				},
 			}))
+
 			setProjectItems(projectDropdownItems)
 			console.log("Current Project:", currentProject)
 		}

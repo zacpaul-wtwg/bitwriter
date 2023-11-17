@@ -2,107 +2,29 @@
 
 import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-	faCog,
-	faUser,
-	faBook,
-	faIdCard,
-	faMountainCity,
-	faStamp,
-	faGem,
-	faList,
-	faCodeBranch,
-} from "@fortawesome/free-solid-svg-icons"
+import { faCog, faUser } from "@fortawesome/free-solid-svg-icons"
 import { Resizable } from "re-resizable"
-
-const tabs = [
-	{
-		id: "project",
-		label: "project",
-		icon: faBook,
-		horizontal_rule: true,
-		title: "Project Directory",
-	},
-	{
-		id: "placeholders",
-		label: "placeholders",
-		icon: faStamp,
-		horizontal_rule: false,
-		title: "Placeholders",
-	},
-	{
-		id: "characters",
-		label: "characters",
-		icon: faIdCard,
-		horizontal_rule: false,
-		title: "Character Blueprints",
-	},
-	{
-		id: "places",
-		label: "places",
-		icon: faMountainCity,
-		horizontal_rule: false,
-		title: "Places Blueprints",
-	},
-	{
-		id: "things",
-		label: "things",
-		icon: faGem,
-		horizontal_rule: true,
-		title: "Things Blueprints",
-	},
-	{
-		id: "todo",
-		label: "todo",
-		icon: faList,
-		horizontal_rule: false,
-		title: "Todo List",
-	},
-	{
-		id: "versioning",
-		label: "versioning",
-		icon: faCodeBranch,
-		horizontal_rule: false,
-		title: "Versions",
-	},
-]
+import { tabs } from "./toolsPanelUtils"
+import { renderContent } from "./ToolsPanelContent"
 
 const ToolsPanel: React.FC = () => {
-	const [activeTab, setActiveTab] = useState<string | null>(null)
+	const [activeTab, setActiveTab] = useState<string>("")
 	const [containerWidth, setContainerWidth] = useState<number>(0) // Initial width
 	const [prevContainerWidth, setPrevContainerWidth] = useState<number>(0) // Previous width
 	const [isExpanded, setIsExpanded] = useState<boolean>(false) // Track if container is expanded
-	console.log("current container width", containerWidth)
-	console.log("prev container width", prevContainerWidth)
 
 	const toggleTab = (tabId: string) => {
 		if (activeTab === tabId) {
-			// If the same tab is clicked, collapse the container
 			setPrevContainerWidth(containerWidth)
 			setContainerWidth(0)
 			setIsExpanded(false)
-			setActiveTab(null)
+			setActiveTab("")
 		} else {
 			if (!isExpanded) {
 				setContainerWidth(prevContainerWidth)
 			}
 			setIsExpanded(true)
 			setActiveTab(tabId)
-		}
-	}
-
-	const renderContent = () => {
-		switch (activeTab) {
-			case "project":
-				return <div></div>
-			case "placeholders":
-				return (
-					<>
-						<h1>Placeholders</h1>
-					</>
-				)
-			default:
-				return null
 		}
 	}
 
@@ -151,7 +73,7 @@ const ToolsPanel: React.FC = () => {
 				}}
 			>
 				<div className='tabs-content'>
-					<div className='content-styles'>{renderContent()}</div>
+					<div className='content-styles'>{renderContent(activeTab)}</div>
 				</div>
 			</Resizable>
 			<style jsx>{`
