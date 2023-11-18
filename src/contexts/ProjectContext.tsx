@@ -1,6 +1,14 @@
 // /context/ProjectContext.tsx
 
-import { createContext, useContext, useState, ReactNode, FC } from "react"
+import {
+	createContext,
+	useContext,
+	useState,
+	useEffect,
+	ReactNode,
+	FC,
+} from "react"
+import { getLocalStorage, setLocalStorage } from "@lib/fetch/localStorageUtils"
 
 interface Project {
 	id: number
@@ -27,7 +35,15 @@ interface ProjectProviderProps {
 }
 
 export const ProjectProvider: FC<ProjectProviderProps> = ({ children }) => {
-	const [currentProject, setCurrentProject] = useState<Project | null>(null)
+	const [currentProject, setCurrentProject] = useState<Project | null>(() => {
+		// Initialize state with project from local storage if it exists
+		return getLocalStorage("currentProject")
+	})
+
+	useEffect(() => {
+		// Save currentProject to local storage whenever it changes
+		setLocalStorage("currentProject", currentProject)
+	}, [currentProject])
 
 	return (
 		<ProjectContext.Provider value={{ currentProject, setCurrentProject }}>
