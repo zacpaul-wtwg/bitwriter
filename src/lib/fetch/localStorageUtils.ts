@@ -1,5 +1,5 @@
 // /src/lib/localStorageUtils.ts
-
+"use client"
 // Function to get data from local storage
 export const getLocalStorage = (key: string) => {
     const storedValue = localStorage.getItem(key);
