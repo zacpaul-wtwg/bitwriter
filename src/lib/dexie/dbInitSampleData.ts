@@ -39,7 +39,7 @@ for (const chapter of mockChapters) {
     await db.scenes.add({
       chapter_id: chapterId, // This is the ID returned from the chapters table
       scene_name: scene.title,
-      scene_content: scene.content,
+      scene_content: JSON.stringify(scene.content),
       scene_order: scene.scene_order,
       last_modified: new Date(),
     });

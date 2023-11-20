@@ -25,8 +25,8 @@ const FileBar: React.FC = () => {
 					setProjectState({
 						id: project.project_id,
 						name: project.project_name,
-						chapter_id: 0, // Default or fetched chapter_id
-						scene_id: 0, // Default or fetched scene_id
+						chapter_id: 1, // Default or fetched chapter_id
+						scene_id: 1, // Default or fetched scene_id
 					})
 				},
 			}))
