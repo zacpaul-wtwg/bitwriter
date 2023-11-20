@@ -14,32 +14,28 @@ const FileBar: React.FC = () => {
 		{ name: string; action: () => void }[]
 	>([])
 	const dropdownRefs = useRef(new Map<string, HTMLDivElement>())
-	const { currentProject, setCurrentProject } = useProject() // Use the useProject hook
+	const { projectState, setProjectState } = useProject() // Use the useProject hook
+
 	useEffect(() => {
 		const fetchProjects = async () => {
 			const projects = await db.projects.toArray()
 			const projectDropdownItems = projects.map((project) => ({
 				name: project.project_name,
 				action: () => {
-					console.log(`Project ${project.project_name} selected`)
-					if (typeof project.project_id === "number") {
-						setCurrentProject({
-							id: project.project_id, // project_id is confirmed to be a number here
-							name: project.project_name,
-						})
-					} else {
-						console.error("Project ID is undefined")
-						// Handle the undefined case appropriately, maybe set an error state or message
-					}
+					setProjectState({
+						id: project.project_id,
+						name: project.project_name,
+						chapter_id: 0, // Default or fetched chapter_id
+						scene_id: 0, // Default or fetched scene_id
+					})
 				},
 			}))
 
 			setProjectItems(projectDropdownItems)
-			console.log("Current Project:", currentProject)
 		}
 
 		fetchProjects()
-	}, [currentProject, setCurrentProject])
+	}, [setProjectState])
 
 	const fileBarActions = [
 		{

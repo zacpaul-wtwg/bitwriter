@@ -1,4 +1,5 @@
 // /src/lib/localStorageUtils.ts
+import { useProject } from "@contexts/ProjectContext"
 
 // Function to get data from local storage
 export const getLocalStorage = (key: string) => {
@@ -20,3 +21,12 @@ export const setLocalStorage = (key: string, value: any) => {
 
     localStorage.setItem(key, JSON.stringify(value));
 };
+
+export const setProjectState = (project_id: number = 0, scene_id: number = 0) => {
+    const projectState:object = {
+        project_id: project_id,
+        scene_id: scene_id,
+    }
+    const projectStateJSON:string = JSON.stringify(projectState);
+    localStorage.setItem('projectState', projectStateJSON);
+}

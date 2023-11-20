@@ -1,6 +1,4 @@
-// /context/ProjectContext.tsx
-
-import {
+import React, {
 	createContext,
 	useContext,
 	useState,
@@ -12,12 +10,18 @@ import { getLocalStorage, setLocalStorage } from "@lib/fetch/localStorageUtils"
 
 interface Project {
 	id: number
-	name: string
+	chapter_id: number
+	scene_id: number
 }
 
 interface ProjectContextType {
-	currentProject: Project | null
-	setCurrentProject: (project: Project | null) => void
+	projectState: Project | null
+	setProjectState: (project: Project | null) => void
+	updateProjectState: (
+		project_id: number,
+		chapter_id: number,
+		scene_id: number
+	) => void
 }
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined)
@@ -35,18 +39,29 @@ interface ProjectProviderProps {
 }
 
 export const ProjectProvider: FC<ProjectProviderProps> = ({ children }) => {
-	const [currentProject, setCurrentProject] = useState<Project | null>(() => {
-		// Initialize state with project from local storage if it exists
-		return getLocalStorage("currentProject")
+	const [projectState, setProjectState] = useState<Project | null>(() => {
+		return getLocalStorage("projectState")
 	})
 
+	// Function to update project state and local storage
+	const updateProjectState = (
+		project_id: number,
+		chapter_id: number,
+		scene_id: number
+	) => {
+		const updatedProject = { id: project_id, chapter_id, scene_id }
+		setProjectState(updatedProject) // Update context state
+		setLocalStorage("projectState", updatedProject) // Update local storage
+	}
+
 	useEffect(() => {
-		// Save currentProject to local storage whenever it changes
-		setLocalStorage("currentProject", currentProject)
-	}, [currentProject])
+		setLocalStorage("projectState", projectState) // Keep local storage in sync
+	}, [projectState])
 
 	return (
-		<ProjectContext.Provider value={{ currentProject, setCurrentProject }}>
+		<ProjectContext.Provider
+			value={{ projectState, setProjectState, updateProjectState }}
+		>
 			{children}
 		</ProjectContext.Provider>
 	)

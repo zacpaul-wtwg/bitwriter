@@ -9,11 +9,11 @@ import { IChapter, IScene } from "@lib/dexie/interfaces"
 export const ChaptersTree = () => {
 	const [chapters, setChapters] = useState<IChapter[]>([])
 	const [scenes, setScenes] = useState<{ [key: number]: IScene[] }>({})
-	const { currentProject } = useProject()
+	const { projectState } = useProject()
 
 	useEffect(() => {
-		if (currentProject && currentProject.id) {
-			fetchChaptersFromDb(currentProject.id)
+		if (projectState && projectState.id) {
+			fetchChaptersFromDb(projectState.id)
 				.then((fetchedChapters) => {
 					setChapters(fetchedChapters)
 					return Promise.all(
@@ -36,7 +36,7 @@ export const ChaptersTree = () => {
 					console.error("Error fetching chapters or scenes:", error)
 				)
 		}
-	}, [currentProject, chapters, scenes])
+	}, [projectState, chapters, scenes])
 
 	return (
 		<div>
