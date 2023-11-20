@@ -35,7 +35,7 @@ const FileBar: React.FC = () => {
 		}
 
 		fetchProjects()
-	}, [setProjectState])
+	}, [setProjectState, activeDropdown])
 
 	const fileBarActions = [
 		{

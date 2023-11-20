@@ -6,6 +6,7 @@ import FileBar from "@/components/fileBar/FileBar"
 import { EditorProvider } from "@contexts/EditorContext" // Adjust the import path as needed
 import { ProjectProvider } from "@contexts/ProjectContext"
 import ToolsPanel from "@/components/toolsPanel/ToolsPanel"
+import { db } from "@lib/dexie/db" // Ensure DB initialization
 
 export default function RootLayout({ children }) {
 	return (
