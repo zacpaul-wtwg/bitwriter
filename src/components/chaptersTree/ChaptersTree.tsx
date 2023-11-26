@@ -5,11 +5,14 @@ import { useProject } from "@contexts/ProjectContext"
 import { fetchChaptersFromDb } from "./fetchChapters"
 import { fetchScenesFromDb } from "./fetchScenes"
 import { IChapter, IScene } from "@lib/dexie/interfaces"
+import { useEditor } from "@contexts/EditorContext"
+import saveEditorContent from "@/lib/utils/saveEditorContent"
 
 export const ChaptersTree = () => {
 	const [chapters, setChapters] = useState<IChapter[]>([])
 	const [scenes, setScenes] = useState<{ [key: number]: IScene[] }>({})
 	const { projectState, setProjectState } = useProject()
+	const { editorState } = useEditor() // Get the current editor state
 
 	useEffect(() => {
 		if (projectState && projectState.id) {
@@ -39,6 +42,8 @@ export const ChaptersTree = () => {
 
 	const handleSceneClick = (scene: IScene) => {
 		if (projectState) {
+			// Save the current content before switching scenes
+			saveEditorContent(editorState, projectState.scene_id)
 			// Update the project state with the new scene_id
 			setProjectState({
 				...projectState, // Keep the existing project data

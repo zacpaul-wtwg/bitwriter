@@ -4,8 +4,7 @@ import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCog, faUser } from "@fortawesome/free-solid-svg-icons"
 import { Resizable } from "re-resizable"
-import { tabs } from "./toolsPanelUtils"
-import { renderContent } from "./ToolsPanelContent"
+import { renderContent, tabs } from "./ToolsPanelContent"
 
 const ToolsPanel: React.FC = () => {
 	const [activeTab, setActiveTab] = useState<string>("")

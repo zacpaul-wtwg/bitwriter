@@ -27,6 +27,7 @@
       "@styles/*": ["./src/styles/*"],
       "@fetchers/*": ["./src/lib/fetchers/*"],
       "@dexie/*": ["./src/lib/dexie/*"],
+      "@hooks/*": ["./src/hooks/*"],
 
     }
   },
