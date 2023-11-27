@@ -1,7 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useEditor } from '@contexts/EditorContext';
 import { convertToRaw } from 'draft-js';
-import { db } from '@lib/dexie/db';
+import { db } from '@dexie/db';
+import { dbLocalSave } from '@dexie/dbLocalSave';
 
 // Debounce function
 const debounce = (func, delay) => {
@@ -28,9 +29,7 @@ const useAutoSaveEditorContent = (sceneId, delay = 1000) => {
         const contentString = JSON.stringify(currentContent.current);
         const savingSceneId = currentSceneId.current; // Capture the scene ID at the time of save
 
-        db.scenes.update(savingSceneId, { scene_content: contentString })
-            .then(() => console.log('Content saved to database:', contentString))
-            .catch(error => console.error('Error saving content:', error));
+        dbLocalSave(savingSceneId, contentString)
     }, []);
 
     // useRef to persist the debounced function across renders

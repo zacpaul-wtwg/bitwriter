@@ -6,7 +6,7 @@ import { fetchChaptersFromDb } from "./fetchChapters"
 import { fetchScenesFromDb } from "./fetchScenes"
 import { IChapter, IScene } from "@lib/dexie/interfaces"
 import { useEditor } from "@contexts/EditorContext"
-import saveEditorContent from "@/lib/utils/saveEditorContent"
+import saveEditorContent from "@/lib/editorLocalSave/saveEditorContent"
 
 export const ChaptersTree = () => {
 	const [chapters, setChapters] = useState<IChapter[]>([])

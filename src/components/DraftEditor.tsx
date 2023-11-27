@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from "react"
 import { Editor, EditorState } from "draft-js"
 import { createDecorator } from "@/lib/addEntity/editorDecorators"
 import { EditorContext } from "@contexts/EditorContext"
-import useAutoSaveEditorContent from "@hooks/AutoSaveEditorContent"
+import useAutoSaveEditorContent from "@lib/editorLocalSave/useAutoSaveEditorContent"
 import { useProject } from "@contexts/ProjectContext"
 
 export default function DraftEditor() {
@@ -10,7 +10,7 @@ export default function DraftEditor() {
 	const { projectState } = useProject()
 
 	// Auto-save the editor content when user stops typing for 2 seconds
-	useAutoSaveEditorContent(projectState.scene_id)
+	useAutoSaveEditorContent(projectState?.scene_id)
 
 	const decorator = useMemo(() => {
 		const entityDisplayTexts = {

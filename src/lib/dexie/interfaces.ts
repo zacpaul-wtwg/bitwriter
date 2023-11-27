@@ -21,5 +21,6 @@ export interface IScene {
   scene_name: string;
   scene_content: string;
   scene_order: number;
+  scene_version: number;
   last_modified: Date;
 }

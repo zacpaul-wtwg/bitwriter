@@ -1,5 +1,6 @@
 import { convertToRaw } from 'draft-js';
 import { db } from '@lib/dexie/db';
+import { dbLocalSave } from '../dexie/dbLocalSave';
 
 const saveEditorContent = (editorState, sceneId) => {
     if (!editorState || !sceneId) {
@@ -11,9 +12,8 @@ const saveEditorContent = (editorState, sceneId) => {
     const rawContent = convertToRaw(contentState);
     const contentString = JSON.stringify(rawContent);
 
-    db.scenes.update(sceneId, { scene_content: contentString })
-        .then(() => console.log('Content saved to database:', contentString))
-        .catch(error => console.error('Error saving content:', error));
+    dbLocalSave(sceneId, contentString);
+
 };
 
 export default saveEditorContent;
