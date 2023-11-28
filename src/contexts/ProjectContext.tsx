@@ -9,14 +9,14 @@ import React, {
 import { getLocalStorage, setLocalStorage } from "@lib/fetch/localStorageUtils"
 
 interface Project {
-	id: number
+	project_id: number
 	chapter_id: number
 	scene_id: number
 }
 
 interface ProjectContextType {
-	projectState: Project | null
-	setProjectState: (project: Project | null) => void
+	projectState: Project
+	setProjectState: (project: Project) => void
 	updateProjectState: (
 		project_id: number,
 		chapter_id: number,
@@ -39,7 +39,7 @@ interface ProjectProviderProps {
 }
 
 export const ProjectProvider: FC<ProjectProviderProps> = ({ children }) => {
-	const [projectState, setProjectState] = useState<Project | null>(() => {
+	const [projectState, setProjectState] = useState<Project>(() => {
 		return getLocalStorage("projectState")
 	})
 
@@ -49,7 +49,7 @@ export const ProjectProvider: FC<ProjectProviderProps> = ({ children }) => {
 		chapter_id: number,
 		scene_id: number
 	) => {
-		const updatedProject = { id: project_id, chapter_id, scene_id }
+		const updatedProject = { project_id: project_id, chapter_id, scene_id }
 		setProjectState(updatedProject) // Update context state
 		setLocalStorage("projectState", updatedProject) // Update local storage
 	}

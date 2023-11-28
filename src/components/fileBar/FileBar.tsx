@@ -7,9 +7,10 @@ import { faPenNib } from "@fortawesome/free-solid-svg-icons"
 import { db } from "@dexie/db"
 import { dbInitAction } from "@dexie/dbInitAction" // Assuming this is the correct import for dbInitAction
 import { useProject } from "@contexts/ProjectContext" // Import useProject
+import { initializeNewProject } from "@/lib/dexie/dbInitNewProject"
 
 const FileBar: React.FC = () => {
-	const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+	const [activeDropdown, setActiveDropdown] = useState<string>("")
 	const [projectItems, setProjectItems] = useState<
 		{ name: string; action: () => void }[]
 	>([])
@@ -23,8 +24,7 @@ const FileBar: React.FC = () => {
 				name: project.project_name,
 				action: () => {
 					setProjectState({
-						id: project.project_id,
-						name: project.project_name,
+						project_id: project.project_id,
 						chapter_id: 1, // Default or fetched chapter_id
 						scene_id: 1, // Default or fetched scene_id
 					})
@@ -36,7 +36,7 @@ const FileBar: React.FC = () => {
 
 		fetchProjects()
 	}, [setProjectState, activeDropdown])
-
+	//TODO: set navigation of create new project to new-project page
 	const fileBarActions = [
 		{
 			id: "file",
@@ -44,7 +44,7 @@ const FileBar: React.FC = () => {
 			dropdown: [
 				{
 					name: "Create New Project",
-					action: () => console.log("Creating new project..."),
+					action: () => initializeNewProject(),
 				},
 				{
 					name: "Create Example Project",
@@ -65,11 +65,10 @@ const FileBar: React.FC = () => {
 			label: "Projects",
 			dropdown: projectItems,
 		},
-		// ... other sections
 	]
 
 	const toggleDropdown = (actionId: string) => {
-		setActiveDropdown(activeDropdown === actionId ? null : actionId)
+		setActiveDropdown(activeDropdown === actionId ? "" : actionId)
 	}
 
 	const handleDropdownAction = (dropdownAction: {
@@ -78,7 +77,7 @@ const FileBar: React.FC = () => {
 	}) => {
 		console.log(`Dropdown action ${dropdownAction.name} selected`)
 		dropdownAction.action() // Call the action function
-		setActiveDropdown(null) // Close the dropdown after an action is selected
+		setActiveDropdown("") // Close the dropdown after an action is selected
 	}
 
 	// Close the dropdown if the click is outside of the dropdown
@@ -91,7 +90,7 @@ const FileBar: React.FC = () => {
 				}
 			})
 			if (isOutside) {
-				setActiveDropdown(null)
+				setActiveDropdown("")
 			}
 		}
 

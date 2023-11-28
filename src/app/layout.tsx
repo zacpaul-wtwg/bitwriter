@@ -8,8 +8,9 @@ import { ProjectProvider } from "@contexts/ProjectContext"
 import ToolsPanel from "@/components/toolsPanel/ToolsPanel"
 import { db } from "@lib/dexie/db" // Ensure DB initialization
 import EditorUpdater from "@/components/EditorUpdater"
-
+import { usePathname } from "next/navigation"
 export default function RootLayout({ children }) {
+	const path = usePathname()
 	return (
 		<ProjectProvider>
 			<EditorProvider>
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
 					<body>
 						<FileBar />
 						<div className='flex-row'>
-							<ToolsPanel />
+							{path === "/" && <ToolsPanel />}
 							<main className='container'>
 								<div className='content'>{children}</div>
 							</main>

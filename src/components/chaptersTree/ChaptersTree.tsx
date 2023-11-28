@@ -4,19 +4,29 @@ import React, { useEffect, useState } from "react"
 import { useProject } from "@contexts/ProjectContext"
 import { fetchChaptersFromDb } from "./fetchChapters"
 import { fetchScenesFromDb } from "./fetchScenes"
-import { IChapter, IScene } from "@lib/dexie/interfaces"
+import { IProject, IChapter, IScene } from "@lib/dexie/interfaces"
 import { useEditor } from "@contexts/EditorContext"
-import saveEditorContent from "@/lib/editorLocalSave/saveEditorContent"
+import saveEditorContent from "@lib/editorLocalSave/saveEditorContent"
+import { fetchProjectFromDb } from "./fetchProject"
 
 export const ChaptersTree = () => {
 	const [chapters, setChapters] = useState<IChapter[]>([])
+	const [projectData, setProjectData] = useState<IProject>()
 	const [scenes, setScenes] = useState<{ [key: number]: IScene[] }>({})
 	const { projectState, setProjectState } = useProject()
 	const { editorState } = useEditor() // Get the current editor state
 
 	useEffect(() => {
-		if (projectState && projectState.id) {
-			fetchChaptersFromDb(projectState.id)
+		if (projectState && projectState.project_id) {
+			const fetchProjectData = async () => {
+				const project = await fetchProjectFromDb(projectState.project_id)
+				console.log("project", project)
+				if (project !== undefined) {
+					setProjectData(project)
+				}
+			}
+			fetchProjectData()
+			fetchChaptersFromDb(projectState.project_id)
 				.then((fetchedChapters) => {
 					setChapters(fetchedChapters)
 					return Promise.all(
@@ -55,6 +65,7 @@ export const ChaptersTree = () => {
 
 	return (
 		<>
+			<h2>{projectData?.project_name ?? "No Title Found"}</h2>
 			<div>
 				{chapters.length ? (
 					chapters.map((chapter) => (
@@ -66,6 +77,11 @@ export const ChaptersTree = () => {
 										<li
 											key={scene.scene_id}
 											onClick={() => handleSceneClick(scene)}
+											className={
+												projectState.scene_id === scene.scene_id
+													? "current-scene"
+													: ""
+											}
 										>
 											{scene.scene_name}
 										</li>
@@ -78,9 +94,24 @@ export const ChaptersTree = () => {
 				)}
 			</div>
 			<style jsx>{`
+				ul {
+					list-style: none;
+					padding: 0;
+					margin: 0;
+				}
+				li {
+					padding: 0px 12px;
+					width: fit-content;
+				}
 				li:hover {
 					color: white;
 					cursor: pointer;
+				}
+				.current-scene {
+					color: var(--main-background-dark);
+					background-color: var(--gray-medium);
+					font-weight: 700;
+					border-radius: 4px;
 				}
 			`}</style>
 		</>
