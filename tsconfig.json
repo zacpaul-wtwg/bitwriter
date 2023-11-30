@@ -30,6 +30,8 @@
       "@fetchers/*": ["./src/lib/fetchers/*"],
       "@dexie/*": ["./src/lib/dexie/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@customTypes/*": ["src/customTypes/*"],
+      "@utils/*": ["./src/lib/utils/*"],
 
     }
   },

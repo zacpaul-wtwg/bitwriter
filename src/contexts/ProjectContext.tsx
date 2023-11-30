@@ -3,26 +3,14 @@ import React, {
 	useContext,
 	useState,
 	useEffect,
-	ReactNode,
 	FC,
 } from "react"
 import { getLocalStorage, setLocalStorage } from "@lib/fetch/localStorageUtils"
-
-interface Project {
-	project_id: number
-	chapter_id: number
-	scene_id: number
-}
-
-interface ProjectContextType {
-	projectState: Project
-	setProjectState: (project: Project) => void
-	updateProjectState: (
-		project_id: number,
-		chapter_id: number,
-		scene_id: number
-	) => void
-}
+import {
+	ProjectState,
+	ProjectContextType,
+	ProjectProviderProps,
+} from "@customTypes/projectContextTypes" // Update the import path as necessary
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined)
 
@@ -34,28 +22,18 @@ export const useProject = () => {
 	return context
 }
 
-interface ProjectProviderProps {
-	children: ReactNode
-}
-
 export const ProjectProvider: FC<ProjectProviderProps> = ({ children }) => {
-	const [projectState, setProjectState] = useState<Project>(() => {
+	const [projectState, setProjectState] = useState<ProjectState>(() => {
 		return getLocalStorage("projectState")
 	})
 
-	// Function to update project state and local storage
-	const updateProjectState = (
-		project_id: number,
-		chapter_id: number,
-		scene_id: number
-	) => {
-		const updatedProject = { project_id: project_id, chapter_id, scene_id }
-		setProjectState(updatedProject) // Update context state
-		setLocalStorage("projectState", updatedProject) // Update local storage
+	const updateProjectState = (newProjectState: ProjectState) => {
+		setProjectState(newProjectState)
+		setLocalStorage("projectState", newProjectState)
 	}
 
 	useEffect(() => {
-		setLocalStorage("projectState", projectState) // Keep local storage in sync
+		setLocalStorage("projectState", projectState)
 	}, [projectState])
 
 	return (

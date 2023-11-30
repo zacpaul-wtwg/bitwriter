@@ -7,7 +7,6 @@ import { faPenNib } from "@fortawesome/free-solid-svg-icons"
 import { db } from "@dexie/db"
 import { dbInitAction } from "@dexie/dbInitAction" // Assuming this is the correct import for dbInitAction
 import { useProject } from "@contexts/ProjectContext" // Import useProject
-import { initializeNewProject } from "@/lib/dexie/dbInitNewProject"
 
 const FileBar: React.FC = () => {
 	const [activeDropdown, setActiveDropdown] = useState<string>("")
@@ -18,15 +17,17 @@ const FileBar: React.FC = () => {
 	const { projectState, setProjectState } = useProject() // Use the useProject hook
 
 	useEffect(() => {
+		// TODO: split this into a pure function that returns an array of projects. Then use that array to populate the dropdown.
 		const fetchProjects = async () => {
 			const projects = await db.projects.toArray()
 			const projectDropdownItems = projects.map((project) => ({
 				name: project.project_name,
 				action: () => {
+					// TODO: update this to set the first chapter and scene of the project. currently using default ""
 					setProjectState({
 						project_id: project.project_id,
-						chapter_id: 1, // Default or fetched chapter_id
-						scene_id: 1, // Default or fetched scene_id
+						chapter_id: "", // Default or fetched chapter_id
+						scene_id: "", // Default or fetched scene_id
 					})
 				},
 			}))
@@ -44,7 +45,7 @@ const FileBar: React.FC = () => {
 			dropdown: [
 				{
 					name: "Create New Project",
-					action: () => initializeNewProject(),
+					action: () => console.log("Creating new project..."),
 				},
 				{
 					name: "Create Example Project",
