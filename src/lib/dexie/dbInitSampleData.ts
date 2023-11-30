@@ -1,3 +1,5 @@
+// src/lib/dexie/dbInitSampleData.ts
+
 import { db } from './db';
 import mockChapters from '@mocks/chapters.json'; // Adjust path as needed
 import fetchUserInfo from '../fetch/fetchUserInfo';
@@ -8,7 +10,7 @@ export async function initializeSampleData() {
     console.log("Initializing sample data...");
 
     const existingProject = await db.projects
-      .where("project_name")
+      .where("name")
       .equals("Example Project")
       .first();
 
@@ -18,36 +20,38 @@ export async function initializeSampleData() {
     }
 
     console.log("Sample project does not exist, creating it...");
-// @ts-ignore
-const projectId = await db.projects.add({
-  project_name: "Example Project",
-  user_id: userInfo.data.user.id,
-  last_modified: new Date(),
-});
-
-// Assuming mockChapters is an array of objects conforming to IChapter without the chapter_id
-for (const chapter of mockChapters) {
-  const chapterId = await db.chapters.add({
     //@ts-ignore
-    project_id: projectId, // This is the ID returned from the projects table
-    chapter_name: chapter.title,
-    chapter_order: chapter.chapter_order,
-    last_modified: new Date(),
-  });
-
-  // Assuming each chapter has an array of scenes
-  for (const scene of chapter.scenes) {
-    await db.scenes.add({
-      // @ts-ignore
-      chapter_id: chapterId, // This is the ID returned from the chapters table
-      scene_name: scene.title,
-      scene_content: JSON.stringify(scene.content),
-      scene_order: scene.scene_order,
+    const projectId = await db.projects.add({
+      name: "Example Project",
+      user_id: userInfo.data.user.id,
       last_modified: new Date(),
     });
-  }
-}
 
+    for (const chapter of mockChapters) {
+      const chapterId = await db.chapters.add({
+        //@ts-ignore
+        project_id: projectId,
+        user_id: userInfo.data.user.id, // Add user_id for chapters
+        name: chapter.title,
+        order: chapter.chapter_order,
+        last_modified: new Date(),
+      });
+
+      for (const scene of chapter.scenes) {
+        await db.scenes.add({
+          //@ts-ignore
+          chapter_id: chapterId,
+          //@ts-ignore
+          project_id: projectId, // Add project_id for scenes
+          user_id: userInfo.data.user.id, // Add user_id for scenes
+          name: scene.title,
+          content: JSON.stringify(scene.content),
+          order: scene.scene_order,
+          last_modified: new Date(),
+          version: 1, // Assuming version starts at 1
+        });
+      }
+    }
 
     console.log(`Sample project with chapters and scenes created for project_id: ${projectId}`);
 }

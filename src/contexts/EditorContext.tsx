@@ -1,3 +1,5 @@
+// src/contexts/EditorContext.tsx
+
 import React, {
 	createContext,
 	useState,

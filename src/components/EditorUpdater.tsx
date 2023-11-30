@@ -14,12 +14,10 @@ const EditorUpdater = () => {
 			db.scenes
 				.get(projectState.scene_id)
 				.then((scene) => {
-					if (scene && scene.scene_content) {
+					if (scene && scene.content) {
 						try {
 							// Parse the string to an object
-							const contentState = convertFromRaw(
-								JSON.parse(scene.scene_content)
-							)
+							const contentState = convertFromRaw(JSON.parse(scene.content))
 							const newEditorState = EditorState.createWithContent(contentState)
 							updateEditorState(newEditorState)
 						} catch (error) {

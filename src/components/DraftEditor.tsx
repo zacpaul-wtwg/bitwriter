@@ -1,12 +1,14 @@
-import React, { useContext, useMemo } from "react"
+// src/components/DraftEditor.tsx
+
+import React, { useMemo } from "react"
 import { Editor, EditorState } from "draft-js"
 import { createDecorator } from "@/lib/addEntity/editorDecorators"
-import { EditorContext } from "@contexts/EditorContext"
+import { useEditor } from "@contexts/EditorContext"
 import useAutoSaveEditorContent from "@lib/editorLocalSave/useAutoSaveEditorContent"
 import { useProject } from "@contexts/ProjectContext"
 
 export default function DraftEditor() {
-	const { editorState, updateEditorState } = useContext(EditorContext)
+	const { editorState, updateEditorState } = useEditor()
 	const { projectState } = useProject()
 
 	// Auto-save the editor content when user stops typing for 2 seconds

@@ -1,9 +1,13 @@
-import { ReactNode } from 'react';
 import { IProject, IChapter, IScene } from '@customTypes/databaseTypes';
+import { ReactNode } from 'react';
 
-export type ProjectState = Pick<IProject, 'project_id'> 
-  & Pick<IChapter, 'chapter_id'> 
-  & Pick<IScene, 'scene_id'>;
+export type ProjectState = {
+  project_id: IProject['id'];
+  chapter_id: IChapter['id'];
+  scene_id: IScene['id'];
+};
+
+export type ScenesMap = { [key: string]: IScene[] }
 
 export interface ProjectContextType {
   projectState: ProjectState;

@@ -6,7 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenNib } from "@fortawesome/free-solid-svg-icons"
 import { db } from "@dexie/db"
 import { dbInitAction } from "@dexie/dbInitAction" // Assuming this is the correct import for dbInitAction
-import { useProject } from "@contexts/ProjectContext" // Import useProject
+import { useProject } from "@contexts/ProjectContext"
+import setProjectStateUtility from "@/lib/utils/setProjectStateUtility"
+import { useRouter } from "next/navigation"
 
 const FileBar: React.FC = () => {
 	const [activeDropdown, setActiveDropdown] = useState<string>("")
@@ -14,22 +16,16 @@ const FileBar: React.FC = () => {
 		{ name: string; action: () => void }[]
 	>([])
 	const dropdownRefs = useRef(new Map<string, HTMLDivElement>())
-	const { projectState, setProjectState } = useProject() // Use the useProject hook
+	const { setProjectState } = useProject()
+	const router = useRouter()
 
 	useEffect(() => {
-		// TODO: split this into a pure function that returns an array of projects. Then use that array to populate the dropdown.
 		const fetchProjects = async () => {
+			//TODO: use the getProjects utility function here. Currently using the Dexie API directly.
 			const projects = await db.projects.toArray()
 			const projectDropdownItems = projects.map((project) => ({
-				name: project.project_name,
-				action: () => {
-					// TODO: update this to set the first chapter and scene of the project. currently using default ""
-					setProjectState({
-						project_id: project.project_id,
-						chapter_id: "", // Default or fetched chapter_id
-						scene_id: "", // Default or fetched scene_id
-					})
-				},
+				name: project.name,
+				action: () => setProjectStateUtility(project.id, setProjectState),
 			}))
 
 			setProjectItems(projectDropdownItems)
@@ -45,7 +41,7 @@ const FileBar: React.FC = () => {
 			dropdown: [
 				{
 					name: "Create New Project",
-					action: () => console.log("Creating new project..."),
+					action: () => router.push("/new-project"),
 				},
 				{
 					name: "Create Example Project",
