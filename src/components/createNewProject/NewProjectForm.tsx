@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { initializeNewProject } from "@dexie/dbInitNewProject" // Adjust the import path as needed
 import { useProject } from "@contexts/ProjectContext" // Import useProject
 import { Button } from "@components/ui/Button"
-//FIXME: need to unset editorState and projectState on submit.
 const NewProjectForm = () => {
 	const [projectTitle, setProjectTitle] = useState("")
 	const [chapterTitle, setChapterTitle] = useState("")

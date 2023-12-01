@@ -27,7 +27,7 @@
       "@contexts/*": ["./src/contexts/*"],
       "@mocks/*": ["./src/mocks/*"], 
       "@styles/*": ["./src/styles/*"],
-      "@fetchers/*": ["./src/lib/fetchers/*"],
+      "@fetch/*": ["./src/lib/fetch/*"],
       "@dexie/*": ["./src/lib/dexie/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@customTypes/*": ["./src/customTypes/*"],

@@ -33,7 +33,6 @@ const FileBar: React.FC = () => {
 
 		fetchProjects()
 	}, [setProjectState, activeDropdown])
-	//TODO: set navigation of create new project to new-project page
 	const fileBarActions = [
 		{
 			id: "file",

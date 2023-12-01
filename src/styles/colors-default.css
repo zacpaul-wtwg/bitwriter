@@ -1,6 +1,7 @@
 /* COLOR VARIABLES */
 :root {
 	--main-background-dark: rgb(26, 28, 32);
+	--main-background-darkest: rgb(7, 13, 26);
 	--main-background: rgb(48, 49, 54);
 	--main-accent: rgb(56, 71, 114);
 	--gray-medium: rgb(92, 92, 92);
