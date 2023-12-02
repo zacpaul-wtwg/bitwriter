@@ -1,11 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useProject } from "@contexts/ProjectContext"
 import { useEditor } from "@contexts/EditorContext"
 import { IProject, IChapter, IScene } from "@customTypes/databaseTypes"
-import saveEditorContent from "@lib/editorLocalSave/saveEditorContent"
 import { ScenesMap } from "@/customTypes/projectContextTypes"
 import { useGetProjectData } from "./useGetProjectData"
-import { addChapter } from "./handleChapterActions" // Import the addChapter function
+import ChapterBlock from "./ChapterBlock" // Import the new component
+import {
+	handleMenuToggle,
+	handleSceneClick,
+	handleAddChapter,
+} from "./chaptersTreeUtilities"
+import useOutsideClickHandler from "./useOutsideClickHandler"
+
+//TODO: fix types
 
 export const ChaptersTree = () => {
 	const [chapters, setChapters] = useState<IChapter[]>([])
@@ -13,140 +20,124 @@ export const ChaptersTree = () => {
 	const [scenes, setScenes] = useState<ScenesMap>({})
 	const { projectState, setProjectState } = useProject()
 	const { editorState } = useEditor()
+	const [activeMenu, setActiveMenu] = useState<string>("")
+	const menuRefs = useRef(new Map<string, HTMLDivElement>())
 
-	// Function to handle setting and sorting chapters
 	const handleSetChapters = (newChapters) => {
 		const sortedChapters = newChapters.sort((a, b) => a.order - b.order)
 		setChapters(sortedChapters)
 	}
 
-	// Fetch project data and use handleSetChapters to set chapters
 	useGetProjectData(projectState, setProjectData, handleSetChapters, setScenes)
-
-	const [showMenu, setShowMenu] = useState<{ [key: string]: boolean }>({})
-
-	const handleSceneClick = (scene: IScene) => {
-		if (projectState) {
-			saveEditorContent(editorState, projectState.scene_id)
-			setProjectState({
-				...projectState,
-				chapter_id: scene.chapter_id,
-				scene_id: scene.id,
-			})
-		}
-	}
-
-	const handleMenuToggle = (chapterId: string) => {
-		setShowMenu((prev) => ({ ...prev, [chapterId]: !prev[chapterId] }))
-	}
-
-	const handleAddChapter = async (
-		chapterId: string,
-		placement: "before" | "after"
-	) => {
-		if (typeof projectState.project_id === "undefined") {
-			throw new Error("Project state is undefined")
-		}
-		await addChapter(projectState.project_id, chapterId, placement)
-	}
+	useOutsideClickHandler(menuRefs, () => setActiveMenu(""))
 
 	return (
 		<>
 			<h2>{projectData?.name ?? "No Title Found"}</h2>
 			<div>
-				{chapters.length ? (
-					chapters.map((chapter) => (
-						<div key={chapter.id} className='chapter-block'>
-							<span
-								className='options'
-								onClick={() => handleMenuToggle(chapter.id)}
-							>
-								...
-							</span>
-							<h3>
-								{chapter.name}
-								{/* TODO: replace with icon component */}
-							</h3>
-							{showMenu[chapter.id] && (
-								<div>
+				{chapters.map((chapter) => (
+					<>
+						<span
+							className='options-dots'
+							onClick={() =>
+								handleMenuToggle(chapter.id, activeMenu, setActiveMenu)
+							}
+						>
+							{activeMenu === chapter.id && (
+								<div
+									className='chapter-menu'
+									ref={(el) => {
+										if (el) {
+											menuRefs.current.set(chapter.id, el)
+										} else {
+											menuRefs.current.delete(chapter.id)
+										}
+									}}
+								>
 									<button
-										onClick={() => {
-											handleAddChapter(chapter.id, "before")
-										}}
+										className='menu-item'
+										onClick={() =>
+											handleAddChapter(
+												chapter.id,
+												"before",
+												projectState,
+												setActiveMenu
+											)
+										}
 									>
 										Add Chapter Before
 									</button>
-									<button onClick={() => handleAddChapter(chapter.id, "after")}>
+									<button
+										onClick={() =>
+											handleAddChapter(
+												chapter.id,
+												"after",
+												projectState,
+												setActiveMenu
+											)
+										}
+									>
 										Add Chapter After
 									</button>
 								</div>
 							)}
-							<ul>
-								{scenes[chapter.id] &&
-									scenes[chapter.id].map((scene: IScene) => (
-										<li
-											key={scene.id}
-											onClick={() => handleSceneClick(scene)}
-											className={
-												projectState.scene_id === scene.id
-													? "current-scene"
-													: ""
-											}
-										>
-											{scene.name}
-										</li>
-									))}
-							</ul>
-						</div>
-					))
-				) : (
-					<p>No chapters available for this project.</p>
-				)}
+							...
+						</span>
+						<ChapterBlock
+							key={chapter.id}
+							chapterId={chapter.id}
+							chapterName={chapter.name}
+							scenes={scenes[chapter.id] ?? []}
+							handleSceneClick={(scene) =>
+								handleSceneClick(
+									scene,
+									projectState,
+									setProjectState,
+									editorState
+								)
+							}
+							currentSceneId={projectState.scene_id}
+						/>
+					</>
+				))}
 			</div>
 			<style jsx>{`
-				h3,
-				h4,
-				h5,
-				h6 {
-					white-space: nowrap;
-					margin: 0px;
-				}
-				.chapter-block {
-					background-color: var(--main-background-dark);
+				.chapter-menu {
+					z-index: 1000; /* High z-index */
+					font-size: 14px; /* Adjust as needed */
+					left: 0; /* Adjust as needed */
+					top: 27.5px; /* Adjust as needed */
+					position: absolute;
+					background: var(--main-background-dark);
+					display: flex;
+					flex-direction: column;
+					padding: 5px;
 					border: 1px solid var(--gray-medium);
-					padding: 0px 10px 10px 10px;
-					border-radius: 10px;
-					margin-bottom: 10px;
-					overflow: hidden;
+					box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+					z-index: 1002;
+					line-height: 34px;
 				}
-				ul {
-					list-style: none;
-					padding: 0;
-					margin: 0;
-				}
-				li {
-					padding: 0px 12px;
-					border-radius: 4px;
-					cursor: pointer;
-					white-space: nowrap;
-				}
-				li:hover {
-					color: white;
-					background-color: var(--gray-medium);
-				}
-				.current-scene,
-				li:hover.current-scene {
-					color: var(--main-background-dark);
-					background-color: var(--gray-light);
-					font-weight: 700;
-				}
-				.options {
+
+				.chapter-menu button {
+					background-color: var(--main-background-dark);
+					padding: 5px 10px;
 					cursor: pointer;
 					color: var(--gray-light);
-					font-weight: 900;
-					font-size: 1em;
+					white-space: nowrap;
+					border: none;
+				}
+				.chapter-menu button:hover {
+					background-color: var(--gray-medium);
+					color: white;
+				}
+				.options-dots {
+					position: relative;
+					cursor: pointer;
+					width: fit-content;
 				}
 			`}</style>
 		</>
 	)
 }
+
+export default ChaptersTree
