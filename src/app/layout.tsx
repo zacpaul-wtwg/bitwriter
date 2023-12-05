@@ -9,8 +9,11 @@ import ToolsPanel from "@/components/toolsPanel/ToolsPanel"
 import { db } from "@lib/dexie/db" // Ensure DB initialization
 import EditorUpdater from "@/components/EditorUpdater"
 import { usePathname } from "next/navigation"
-// FIXME: type errors here
-export default function RootLayout({ children }) {
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	const path = usePathname()
 	return (
 		<ProjectProvider>
@@ -20,10 +23,7 @@ export default function RootLayout({ children }) {
 					<body>
 						<FileBar />
 						<div className='flex-row'>
-							{/* 
-								TODO: the tools panel should always render it should just be disabled when there is no project state.
-							*/}
-							{path === "/" && <ToolsPanel />}
+							<ToolsPanel />
 							<main className='container'>
 								<div className='content'>{children}</div>
 							</main>

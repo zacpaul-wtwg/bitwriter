@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCog, faUser } from "@fortawesome/free-solid-svg-icons"
 import { Resizable } from "re-resizable"
 import { renderContent, tabs } from "./ToolsPanelContent"
-
+// TODO: set buttons to disabled if no project is active. The panel should not open.
+// TODO: set an alert to open a project if a disabled button is selected while no project is active.
 const ToolsPanel: React.FC = () => {
 	const [activeTab, setActiveTab] = useState<string>("")
-	const [containerWidth, setContainerWidth] = useState<number>(0) // Initial width
-	const [prevContainerWidth, setPrevContainerWidth] = useState<number>(0) // Previous width
-	const [isExpanded, setIsExpanded] = useState<boolean>(false) // Track if container is expanded
-
+	const [containerWidth, setContainerWidth] = useState<number>(0)
+	const [prevContainerWidth, setPrevContainerWidth] = useState<number>(300)
+	const [isExpanded, setIsExpanded] = useState<boolean>(false)
 	const toggleTab = (tabId: string) => {
 		if (activeTab === tabId) {
 			setPrevContainerWidth(containerWidth)
