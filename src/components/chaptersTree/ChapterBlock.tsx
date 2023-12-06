@@ -1,6 +1,6 @@
-// src/components/chaptersTree/ChapterBlock.tsx
 import React from "react"
 import { IScene } from "@customTypes/databaseTypes"
+import { updateName, Type } from "@lib/dexie/queries/updateName"
 
 interface ChapterBlockProps {
 	chapterId: string
@@ -8,6 +8,10 @@ interface ChapterBlockProps {
 	scenes: IScene[]
 	handleSceneClick: (scene: IScene) => void
 	currentSceneId: string | null
+	editableChapterId: string | null
+	editableText: string
+	setEditableText: (text: string) => void
+	handleBlur: () => void
 }
 
 export const ChapterBlock: React.FC<ChapterBlockProps> = ({
@@ -16,11 +20,40 @@ export const ChapterBlock: React.FC<ChapterBlockProps> = ({
 	scenes,
 	handleSceneClick,
 	currentSceneId,
+	editableChapterId,
+	editableText,
+	setEditableText,
+	handleBlur,
 }) => {
+	const handleKeyPress = async (e) => {
+		if (e.key === "Enter") {
+			e.preventDefault()
+			e.target.blur()
+		}
+	}
+
+	const handleFocus = (event) => {
+		event.target.select()
+	}
+
 	return (
 		<>
 			<div className='title-bar'>
-				<span className='chapter-heading'>{chapterName}</span>
+				{editableChapterId === chapterId ? (
+					<input
+						type='text'
+						value={editableText}
+						onChange={(e) => setEditableText(e.target.value)}
+						onBlur={handleBlur}
+						onKeyPress={handleKeyPress}
+						onFocus={handleFocus}
+						autoFocus
+					/>
+				) : (
+					<>
+						<span className='chapter-heading'>{chapterName}</span>
+					</>
+				)}
 			</div>
 			<div key={chapterId} className='chapter-block'>
 				<ul>

@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { useProject } from "@contexts/ProjectContext"
 import { useEditor } from "@contexts/EditorContext"
-import { IProject, IChapter, IScene } from "@customTypes/databaseTypes"
+import { IChapter, IScene, IProject } from "@customTypes/databaseTypes"
 import { ScenesMap } from "@/customTypes/projectContextTypes"
 import { useGetProjectData } from "./useGetProjectData"
-import ChapterBlock from "./ChapterBlock" // Import the new component
+import ChapterBlock from "./ChapterBlock"
 import {
 	handleMenuToggle,
 	handleSceneClick,
 	handleAddChapter,
 } from "./chaptersTreeUtilities"
 import useOutsideClickHandler from "./useOutsideClickHandler"
-
-//TODO: fix types
+import { updateName, Type } from "@lib/dexie/queries/updateName"
 
 export const ChaptersTree = () => {
 	const [chapters, setChapters] = useState<IChapter[]>([])
@@ -22,10 +21,39 @@ export const ChaptersTree = () => {
 	const { editorState } = useEditor()
 	const [activeMenu, setActiveMenu] = useState<string>("")
 	const menuRefs = useRef(new Map<string, HTMLDivElement>())
-
+	const [editableChapterId, setEditableChapterId] = useState<string | null>(
+		null
+	)
+	const [editableText, setEditableText] = useState("")
+	//FIXME: fix implicit "any" type
 	const handleSetChapters = (newChapters) => {
 		const sortedChapters = newChapters.sort((a, b) => a.order - b.order)
 		setChapters(sortedChapters)
+	}
+
+	const handleEditChapter = (chapterId: string) => {
+		setEditableChapterId(chapterId)
+		const chapterToEdit = chapters.find((chapter) => chapter.id === chapterId)
+		if (chapterToEdit) {
+			setEditableText(chapterToEdit.name)
+		}
+	}
+
+	const handleBlur = async () => {
+		if (editableChapterId && editableText) {
+			await updateName(Type.Chapter, {
+				id: editableChapterId,
+				name: editableText,
+			})
+			setChapters(
+				chapters.map((chapter) =>
+					chapter.id === editableChapterId
+						? { ...chapter, name: editableText }
+						: chapter
+				)
+			)
+		}
+		setEditableChapterId(null)
 	}
 
 	useGetProjectData(projectState, setProjectData, handleSetChapters, setScenes)
@@ -36,7 +64,7 @@ export const ChaptersTree = () => {
 			<h2>{projectData?.name ?? "No Title Found"}</h2>
 			<div>
 				{chapters.map((chapter) => (
-					<>
+					<div key={chapter.id}>
 						<span
 							className='options-dots'
 							onClick={() =>
@@ -56,6 +84,11 @@ export const ChaptersTree = () => {
 								>
 									<button
 										className='menu-item'
+										onClick={() => handleEditChapter(chapter.id)}
+									>
+										Edit Chapter
+									</button>
+									<button
 										onClick={() =>
 											handleAddChapter(
 												chapter.id,
@@ -84,7 +117,6 @@ export const ChaptersTree = () => {
 							...
 						</span>
 						<ChapterBlock
-							key={chapter.id}
 							chapterId={chapter.id}
 							chapterName={chapter.name}
 							scenes={scenes[chapter.id] ?? []}
@@ -97,8 +129,12 @@ export const ChaptersTree = () => {
 								)
 							}
 							currentSceneId={projectState.scene_id}
+							editableChapterId={editableChapterId}
+							editableText={editableText}
+							setEditableText={setEditableText}
+							handleBlur={handleBlur}
 						/>
-					</>
+					</div>
 				))}
 			</div>
 			<style jsx>{`

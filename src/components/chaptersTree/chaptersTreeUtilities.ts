@@ -40,6 +40,7 @@ export const handleAddChapter = async (
 	projectState,
 	setActiveMenu: Function
 ) => {
+	console.log("handleAddChapter was called")
 	if (typeof projectState.project_id === "undefined") {
 		throw new Error("Project state is undefined")
 	}

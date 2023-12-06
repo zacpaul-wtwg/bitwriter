@@ -1,3 +1,4 @@
+//src/customTypes/databaseTypes.ts
 export interface IProject {
 	id: string
 	name: string
