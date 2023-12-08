@@ -91,7 +91,7 @@ const ToolsPanel: React.FC = () => {
 				}
 				.tabs {
 					flex: 0 0 50px;
-					background: var(--main-background-dark);
+					background: var(--main-75);
 					color: var(--gray-light);
 					overflow-y: auto;
 					text-align: right;
@@ -119,7 +119,7 @@ const ToolsPanel: React.FC = () => {
 					height: 100%;
 					width: 100%;
 					overflow-y: auto;
-					background: var(--main-background-dark);
+					background: var(--main-75);
 					border-right: 1px solid var(--gray-medium);
 				}
 				.content-styles {

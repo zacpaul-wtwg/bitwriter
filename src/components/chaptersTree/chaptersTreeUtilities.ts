@@ -1,15 +1,18 @@
-// src/components/chaptersTree/chaptersTreeUtilities.ts
 import { IScene, IChapter } from "@customTypes/databaseTypes"
 import saveEditorContent from "@lib/editorLocalSave/saveEditorContent"
 import { addChapter } from "./handleChapterActions"
+import { db } from "@dexie/db"
+import { Type } from "@lib/dexie/queries/updateName"
 
-// TODO: fix types
+// TODO: fix types in this file.
 
-export const handleSetChapters = (newChapters: IChapter[]) => {
+// Sorts chapters by their order and returns the sorted array
+export const handleSetChapters = (newChapters: IChapter[]): IChapter[] => {
 	const sortedChapters = newChapters.sort((a, b) => a.order - b.order)
 	return sortedChapters
 }
 
+// Handles clicking on a scene
 export const handleSceneClick = (
 	scene: IScene,
 	projectState,
@@ -26,6 +29,7 @@ export const handleSceneClick = (
 	}
 }
 
+// Toggles the chapter options menu
 export const handleMenuToggle = (
 	chapterId: string,
 	activeMenu: string,
@@ -34,6 +38,7 @@ export const handleMenuToggle = (
 	setActiveMenu(activeMenu === chapterId ? "" : chapterId)
 }
 
+// Adds a chapter before or after an existing chapter
 export const handleAddChapter = async (
 	chapterId: string,
 	placement: "before" | "after",
@@ -46,4 +51,18 @@ export const handleAddChapter = async (
 	}
 	await addChapter(projectState.project_id, chapterId, placement)
 	setActiveMenu("") // Close menu after action
+}
+
+// Updates the name of a chapter
+export const handleEditChapter = async (
+	chapterId: string,
+	newName: string,
+	chapters: IChapter[],
+	setChapters: React.Dispatch<React.SetStateAction<IChapter[]>>
+) => {
+	await db.chapters.update(chapterId, { name: newName })
+	const updatedChapters = chapters.map((chapter) =>
+		chapter.id === chapterId ? { ...chapter, name: newName } : chapter
+	)
+	setChapters(updatedChapters)
 }

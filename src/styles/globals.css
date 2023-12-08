@@ -10,11 +10,11 @@
 /* COLORS ASSIGNMENT */
 html,
 body {
-	background-color: var(--main-background);
+	background-color: var(--main-50);
 }
 .content,
 .tabs-content {
-	background-color: var(--main-background-dark);
+	background-color: var(--main-75);
 	color: var(--gray-medium);
 }
 .var {

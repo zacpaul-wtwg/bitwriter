@@ -1,4 +1,4 @@
-import { ChaptersTree } from "../chaptersTree/ChaptersTree"
+import ChaptersTree from "@components/chaptersTree/ChaptersTree"
 import {
 	faBook,
 	faIdCard,
