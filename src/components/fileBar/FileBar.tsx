@@ -137,7 +137,7 @@ const FileBar: React.FC = () => {
 				.top-file-bar {
 					display: flex;
 					align-items: center;
-					background: var(--main-background-dark);
+					background: var(--main-75);
 					padding: 5px 10px;
 					z-index: 1001;
 					border-bottom: 3px solid var(--gray-medium);
@@ -157,7 +157,7 @@ const FileBar: React.FC = () => {
 				}
 				.dropdown-content {
 					position: absolute;
-					background: var(--main-background-dark);
+					background: var(--main-75);
 					display: flex;
 					flex-direction: column;
 					padding: 5px;

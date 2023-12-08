@@ -55,7 +55,7 @@ const NewProjectForm = () => {
 			<style jsx>{`
 				.container {
 					padding: 20px;
-					background-color: var(--main-background-dark);
+					background-color: var(--main-75);
 					color: var(--gray-light);
 					border-radius: 8px;
 					box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -77,7 +77,7 @@ const NewProjectForm = () => {
 					padding: 10px;
 					border-radius: 4px;
 					border: 1px solid var(--gray-medium);
-					background-color: var(--main-background);
+					background-color: var(--main-50);
 					color: var(--gray-light);
 				}
 				button {

@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
 						background-color: var(--main-accent);
 					}
 					.secondary {
-						background-color: var(--main-background-dark);
+						background-color: var(--main-75);
 						border: solid 1px var(--gray-light);
 					}
 				`}

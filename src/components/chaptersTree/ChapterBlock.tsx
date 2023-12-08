@@ -79,7 +79,7 @@ export const ChapterBlock: React.FC<ChapterBlockProps> = ({
 					padding-left: 20px;
 				}
 				.chapter-block {
-					background-color: var(--main-background-dark);
+					background-color: var(--main-75);
 					border: 1px solid var(--gray-medium);
 					padding: 10px 10px 10px 10px;
 					border-radius: 0px 0px 10px 10px;
@@ -104,7 +104,7 @@ export const ChapterBlock: React.FC<ChapterBlockProps> = ({
 				}
 				.current-scene,
 				li:hover.current-scene {
-					color: var(--main-background-dark);
+					color: var(--main-75);
 					background-color: var(--gray-light);
 					font-weight: 700;
 				}

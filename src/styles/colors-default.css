@@ -1,13 +1,30 @@
 /* COLOR VARIABLES */
 :root {
-	--main-background-dark: rgb(26, 28, 32);
-	--main-background-darkest: rgb(7, 13, 26);
-	--main-background: rgb(48, 49, 54);
+	/* Base colors */
+	--main-100: rgb(20, 21, 24);
+	--main-75: rgb(32, 34, 39);
+	--main-50: rgb(48, 49, 54);
+	--main-25: rgb(71, 73, 80);
+	--main-10: rgb(98, 101, 110);
 	--main-accent: rgb(56, 71, 114);
-	--gray-medium: rgb(92, 92, 92);
-	--gray-dark: rgb(51, 51, 51);
-	--gray-light: rgb(182, 182, 182);
 
-	--error: rgb(146, 0, 0);
-	--success: rgb(0, 117, 0);
+	--gray-dark: rgb(51, 51, 51);
+	--gray-medium: rgb(92, 92, 92);
+	--gray-light: rgb(182, 182, 182);
+	--gray-lightest: rgb(224, 224, 224);
+
+	--red: rgb(146, 0, 0);
+	--green: rgb(0, 117, 0);
+
+	/* element colors */
+
+	/* errors */
+	--success: var(--green);
+	--error: var(--red);
+	--message-text: var(--gray-lightest);
+
+	/* Menu */
+	--menu: var(--main-100);
+	--menu-item-hover: var(--main-50);
+	--menu-text-color: var(--gray-lightest);
 }

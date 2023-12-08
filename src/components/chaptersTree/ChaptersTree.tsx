@@ -57,6 +57,7 @@ const ChaptersTree = () => {
 					<div key={chapter.id}>
 						<ChaptersOptions
 							chapterId={chapter.id}
+							chapterName={chapter.name}
 							handleEditChapter={() => {
 								setEditableChapterId(chapter.id)
 								setEditableText(chapter.name)
