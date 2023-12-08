@@ -1,9 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 
 interface ChaptersOptionsProps {
 	chapterId: string
-	activeMenu: string
-	setActiveMenu: (menuId: string) => void
 	handleEditChapter: () => void
 	handleAddChapter: (
 		chapterId: string,
@@ -15,20 +13,20 @@ interface ChaptersOptionsProps {
 
 const ChaptersOptions: React.FC<ChaptersOptionsProps> = ({
 	chapterId,
-	activeMenu,
-	setActiveMenu,
 	handleEditChapter,
 	handleAddChapter,
 	projectState,
 }) => {
-	const handleMenuToggle = () => {
-		setActiveMenu(activeMenu === chapterId ? "" : chapterId)
+	const [isMenuVisible, setIsMenuVisible] = useState(false)
+
+	const toggleMenu = () => {
+		setIsMenuVisible(!isMenuVisible)
 	}
 
 	return (
 		<>
-			<span className='options-dots' onClick={handleMenuToggle}>
-				{activeMenu === chapterId && (
+			<span className='options-dots' onClick={toggleMenu}>
+				{isMenuVisible && (
 					<div className='chapter-menu'>
 						<button className='menu-item' onClick={handleEditChapter}>
 							Edit Chapter
@@ -45,9 +43,9 @@ const ChaptersOptions: React.FC<ChaptersOptionsProps> = ({
 						>
 							Add Chapter After
 						</button>
-						{/* ...other menu items... */}
 					</div>
 				)}
+				{/* below is the element that the user will click on to access the menu */}
 				...
 			</span>
 			<style jsx>{`

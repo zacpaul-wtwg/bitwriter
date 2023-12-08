@@ -57,13 +57,18 @@ const ChaptersTree = () => {
 					<div key={chapter.id}>
 						<ChaptersOptions
 							chapterId={chapter.id}
-							activeMenu={activeMenu}
-							setActiveMenu={setActiveMenu}
 							handleEditChapter={() => {
 								setEditableChapterId(chapter.id)
 								setEditableText(chapter.name)
 							}}
-							handleAddChapter={handleAddChapter}
+							handleAddChapter={(chapterId, position) =>
+								handleAddChapter(
+									chapterId,
+									position,
+									projectState,
+									setActiveMenu
+								)
+							}
 							projectState={projectState}
 						/>
 						<ChapterBlock
@@ -87,41 +92,6 @@ const ChaptersTree = () => {
 					</div>
 				))}
 			</div>
-			<style jsx>{`
-				.chapter-menu {
-					z-index: 1000; /* High z-index */
-					font-size: 14px; /* Adjust as needed */
-					left: 0; /* Adjust as needed */
-					top: 27.5px; /* Adjust as needed */
-					position: absolute;
-					background: var(--main-background-dark);
-					display: flex;
-					flex-direction: column;
-					padding: 5px;
-					border: 1px solid var(--gray-medium);
-					box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-					z-index: 1002;
-					line-height: 34px;
-				}
-
-				.chapter-menu button {
-					background-color: var(--main-background-dark);
-					padding: 5px 10px;
-					cursor: pointer;
-					color: var(--gray-light);
-					white-space: nowrap;
-					border: none;
-				}
-				.chapter-menu button:hover {
-					background-color: var(--gray-medium);
-					color: white;
-				}
-				.options-dots {
-					position: relative;
-					cursor: pointer;
-					width: fit-content;
-				}
-			`}</style>
 		</>
 	)
 }
